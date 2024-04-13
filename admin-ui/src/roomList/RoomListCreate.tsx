@@ -8,9 +8,12 @@ import {
   NumberInput,
   ReferenceInput,
   SelectInput,
+  ReferenceArrayInput,
+  SelectArrayInput,
 } from "react-admin";
 
 import { UserTitle } from "../user/UserTitle";
+import { TripTitle } from "../trip/TripTitle";
 import { WishListTitle } from "../wishList/WishListTitle";
 
 export const RoomListCreate = (props: CreateProps): React.ReactElement => {
@@ -34,6 +37,14 @@ export const RoomListCreate = (props: CreateProps): React.ReactElement => {
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>
         <TextInput label="title" source="title" />
+        <ReferenceArrayInput
+          source="trips"
+          reference="Trip"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={TripTitle} />
+        </ReferenceArrayInput>
         <ReferenceInput
           source="wishList.id"
           reference="WishList"

@@ -22,6 +22,7 @@ import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 import { Type } from "class-transformer";
+import { TripCreateNestedManyWithoutRoomListsInput } from "./TripCreateNestedManyWithoutRoomListsInput";
 import { WishListWhereUniqueInput } from "../../wishList/base/WishListWhereUniqueInput";
 
 @InputType()
@@ -109,6 +110,18 @@ class RoomListCreateInput {
   @IsString()
   @Field(() => String)
   title!: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => TripCreateNestedManyWithoutRoomListsInput,
+  })
+  @ValidateNested()
+  @Type(() => TripCreateNestedManyWithoutRoomListsInput)
+  @IsOptional()
+  @Field(() => TripCreateNestedManyWithoutRoomListsInput, {
+    nullable: true,
+  })
+  trips?: TripCreateNestedManyWithoutRoomListsInput;
 
   @ApiProperty({
     required: false,

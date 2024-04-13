@@ -1,5 +1,6 @@
 import { InputJsonValue } from "../../types";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
+import { TripUpdateManyWithoutRoomListsInput } from "./TripUpdateManyWithoutRoomListsInput";
 import { WishListWhereUniqueInput } from "../wishList/WishListWhereUniqueInput";
 
 export type RoomListUpdateInput = {
@@ -14,5 +15,6 @@ export type RoomListUpdateInput = {
   price?: number;
   roomCreatedBy?: UserWhereUniqueInput;
   title?: string;
+  trips?: TripUpdateManyWithoutRoomListsInput;
   wishList?: WishListWhereUniqueInput | null;
 };

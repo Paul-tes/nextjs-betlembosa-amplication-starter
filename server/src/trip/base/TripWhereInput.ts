@@ -14,6 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { StringFilter } from "../../util/StringFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
+import { RoomListWhereUniqueInput } from "../../roomList/base/RoomListWhereUniqueInput";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
@@ -28,6 +29,18 @@ class TripWhereInput {
     nullable: true,
   })
   id?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => RoomListWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => RoomListWhereUniqueInput)
+  @IsOptional()
+  @Field(() => RoomListWhereUniqueInput, {
+    nullable: true,
+  })
+  roomList?: RoomListWhereUniqueInput;
 
   @ApiProperty({
     required: false,

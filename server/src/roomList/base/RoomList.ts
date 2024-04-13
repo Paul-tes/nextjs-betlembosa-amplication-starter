@@ -23,6 +23,7 @@ import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
 import { User } from "../../user/base/User";
+import { Trip } from "../../trip/base/Trip";
 import { WishList } from "../../wishList/base/WishList";
 
 @ObjectType()
@@ -125,6 +126,15 @@ class RoomList {
   @IsString()
   @Field(() => String)
   title!: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Trip],
+  })
+  @ValidateNested()
+  @Type(() => Trip)
+  @IsOptional()
+  trips?: Array<Trip>;
 
   @ApiProperty({
     required: true,

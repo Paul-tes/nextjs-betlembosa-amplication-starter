@@ -14,6 +14,7 @@ import { PrismaService } from "../../prisma/prisma.service";
 import {
   Prisma,
   RoomList as PrismaRoomList,
+  Trip as PrismaTrip,
   User as PrismaUser,
   WishList as PrismaWishList,
 } from "@prisma/client";
@@ -49,6 +50,17 @@ export class RoomListServiceBase {
     args: Prisma.SelectSubset<T, Prisma.RoomListDeleteArgs>
   ): Promise<PrismaRoomList> {
     return this.prisma.roomList.delete(args);
+  }
+
+  async findTrips(
+    parentId: string,
+    args: Prisma.TripFindManyArgs
+  ): Promise<PrismaTrip[]> {
+    return this.prisma.roomList
+      .findUniqueOrThrow({
+        where: { id: parentId },
+      })
+      .trips(args);
   }
 
   async getRoomCreatedBy(parentId: string): Promise<PrismaUser | null> {

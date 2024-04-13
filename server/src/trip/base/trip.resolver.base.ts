@@ -26,6 +26,7 @@ import { TripFindUniqueArgs } from "./TripFindUniqueArgs";
 import { CreateTripArgs } from "./CreateTripArgs";
 import { UpdateTripArgs } from "./UpdateTripArgs";
 import { DeleteTripArgs } from "./DeleteTripArgs";
+import { RoomList } from "../../roomList/base/RoomList";
 import { User } from "../../user/base/User";
 import { TripService } from "../trip.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
@@ -90,6 +91,12 @@ export class TripResolverBase {
       data: {
         ...args.data,
 
+        roomList: args.data.roomList
+          ? {
+              connect: args.data.roomList,
+            }
+          : undefined,
+
         user: {
           connect: args.data.user,
         },
@@ -110,6 +117,12 @@ export class TripResolverBase {
         ...args,
         data: {
           ...args.data,
+
+          roomList: args.data.roomList
+            ? {
+                connect: args.data.roomList,
+              }
+            : undefined,
 
           user: {
             connect: args.data.user,
@@ -143,6 +156,25 @@ export class TripResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => RoomList, {
+    nullable: true,
+    name: "roomList",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "RoomList",
+    action: "read",
+    possession: "any",
+  })
+  async getRoomList(@graphql.Parent() parent: Trip): Promise<RoomList | null> {
+    const result = await this.service.getRoomList(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

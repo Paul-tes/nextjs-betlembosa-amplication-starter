@@ -350,6 +350,13 @@ export class UserControllerBase {
       select: {
         createdAt: true,
         id: true,
+
+        roomList: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
 
         user: {

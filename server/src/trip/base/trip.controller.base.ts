@@ -50,6 +50,12 @@ export class TripControllerBase {
       data: {
         ...data,
 
+        roomList: data.roomList
+          ? {
+              connect: data.roomList,
+            }
+          : undefined,
+
         user: {
           connect: data.user,
         },
@@ -57,6 +63,13 @@ export class TripControllerBase {
       select: {
         createdAt: true,
         id: true,
+
+        roomList: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
 
         user: {
@@ -87,6 +100,13 @@ export class TripControllerBase {
       select: {
         createdAt: true,
         id: true,
+
+        roomList: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
 
         user: {
@@ -118,6 +138,13 @@ export class TripControllerBase {
       select: {
         createdAt: true,
         id: true,
+
+        roomList: {
+          select: {
+            id: true,
+          },
+        },
+
         updatedAt: true,
 
         user: {
@@ -157,6 +184,12 @@ export class TripControllerBase {
         data: {
           ...data,
 
+          roomList: data.roomList
+            ? {
+                connect: data.roomList,
+              }
+            : undefined,
+
           user: {
             connect: data.user,
           },
@@ -164,6 +197,13 @@ export class TripControllerBase {
         select: {
           createdAt: true,
           id: true,
+
+          roomList: {
+            select: {
+              id: true,
+            },
+          },
+
           updatedAt: true,
 
           user: {
@@ -203,6 +243,13 @@ export class TripControllerBase {
         select: {
           createdAt: true,
           id: true,
+
+          roomList: {
+            select: {
+              id: true,
+            },
+          },
+
           updatedAt: true,
 
           user: {

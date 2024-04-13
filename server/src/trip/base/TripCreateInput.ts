@@ -11,12 +11,25 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
-import { ValidateNested } from "class-validator";
+import { RoomListWhereUniqueInput } from "../../roomList/base/RoomListWhereUniqueInput";
+import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
+import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class TripCreateInput {
+  @ApiProperty({
+    required: false,
+    type: () => RoomListWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => RoomListWhereUniqueInput)
+  @IsOptional()
+  @Field(() => RoomListWhereUniqueInput, {
+    nullable: true,
+  })
+  roomList?: RoomListWhereUniqueInput | null;
+
   @ApiProperty({
     required: true,
     type: () => UserWhereUniqueInput,
