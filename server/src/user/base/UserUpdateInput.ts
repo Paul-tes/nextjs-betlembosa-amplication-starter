@@ -17,6 +17,7 @@ import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
 import { RoomListUpdateManyWithoutUsersInput } from "./RoomListUpdateManyWithoutUsersInput";
 import { Type } from "class-transformer";
+import { WishListUpdateManyWithoutUsersInput } from "./WishListUpdateManyWithoutUsersInput";
 
 @InputType()
 class UserUpdateInput {
@@ -96,6 +97,18 @@ class UserUpdateInput {
     nullable: true,
   })
   username?: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => WishListUpdateManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => WishListUpdateManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => WishListUpdateManyWithoutUsersInput, {
+    nullable: true,
+  })
+  wishLists?: WishListUpdateManyWithoutUsersInput;
 }
 
 export { UserUpdateInput as UserUpdateInput };

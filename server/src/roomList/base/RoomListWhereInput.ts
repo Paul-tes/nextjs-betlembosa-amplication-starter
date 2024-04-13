@@ -15,10 +15,22 @@ import { StringFilter } from "../../util/StringFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
 import { JsonFilter } from "../../util/JsonFilter";
+import { FloatFilter } from "../../util/FloatFilter";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class RoomListWhereInput {
+  @ApiProperty({
+    required: false,
+    type: StringFilter,
+  })
+  @Type(() => StringFilter)
+  @IsOptional()
+  @Field(() => StringFilter, {
+    nullable: true,
+  })
+  description?: StringFilter;
+
   @ApiProperty({
     required: false,
     type: StringFilter,
@@ -106,6 +118,17 @@ class RoomListWhereInput {
     nullable: true,
   })
   placeType?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: FloatFilter,
+  })
+  @Type(() => FloatFilter)
+  @IsOptional()
+  @Field(() => FloatFilter, {
+    nullable: true,
+  })
+  price?: FloatFilter;
 
   @ApiProperty({
     required: false,

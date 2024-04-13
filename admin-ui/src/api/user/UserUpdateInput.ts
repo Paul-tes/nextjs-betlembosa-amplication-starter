@@ -1,5 +1,6 @@
 import { InputJsonValue } from "../../types";
 import { RoomListUpdateManyWithoutUsersInput } from "./RoomListUpdateManyWithoutUsersInput";
+import { WishListUpdateManyWithoutUsersInput } from "./WishListUpdateManyWithoutUsersInput";
 
 export type UserUpdateInput = {
   email?: string | null;
@@ -9,4 +10,5 @@ export type UserUpdateInput = {
   roles?: InputJsonValue;
   roomLists?: RoomListUpdateManyWithoutUsersInput;
   username?: string;
+  wishLists?: WishListUpdateManyWithoutUsersInput;
 };

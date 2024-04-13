@@ -17,6 +17,7 @@ import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
 import { RoomList } from "../../roomList/base/RoomList";
+import { WishList } from "../../wishList/base/WishList";
 
 @ObjectType()
 class User {
@@ -100,6 +101,15 @@ class User {
   @IsString()
   @Field(() => String)
   username!: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => [WishList],
+  })
+  @ValidateNested()
+  @Type(() => WishList)
+  @IsOptional()
+  wishLists?: Array<WishList>;
 }
 
 export { User as User };

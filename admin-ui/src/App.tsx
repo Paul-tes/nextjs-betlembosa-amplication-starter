@@ -13,6 +13,10 @@ import { RoomListList } from "./roomList/RoomListList";
 import { RoomListCreate } from "./roomList/RoomListCreate";
 import { RoomListEdit } from "./roomList/RoomListEdit";
 import { RoomListShow } from "./roomList/RoomListShow";
+import { WishListList } from "./wishList/WishListList";
+import { WishListCreate } from "./wishList/WishListCreate";
+import { WishListEdit } from "./wishList/WishListEdit";
+import { WishListShow } from "./wishList/WishListShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -52,6 +56,13 @@ const App = (): React.ReactElement => {
           edit={RoomListEdit}
           create={RoomListCreate}
           show={RoomListShow}
+        />
+        <Resource
+          name="WishList"
+          list={WishListList}
+          edit={WishListEdit}
+          create={WishListCreate}
+          show={WishListShow}
         />
       </Admin>
     </div>

@@ -29,6 +29,9 @@ import { UserUpdateInput } from "./UserUpdateInput";
 import { RoomListFindManyArgs } from "../../roomList/base/RoomListFindManyArgs";
 import { RoomList } from "../../roomList/base/RoomList";
 import { RoomListWhereUniqueInput } from "../../roomList/base/RoomListWhereUniqueInput";
+import { WishListFindManyArgs } from "../../wishList/base/WishListFindManyArgs";
+import { WishList } from "../../wishList/base/WishList";
+import { WishListWhereUniqueInput } from "../../wishList/base/WishListWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -225,6 +228,7 @@ export class UserControllerBase {
       ...query,
       select: {
         createdAt: true,
+        description: true,
         id: true,
         locationData: true,
         locationType: true,
@@ -233,6 +237,7 @@ export class UserControllerBase {
         placeAmeneties: true,
         placeSpace: true,
         placeType: true,
+        price: true,
 
         roomCreatedBy: {
           select: {
@@ -308,6 +313,107 @@ export class UserControllerBase {
   ): Promise<void> {
     const data = {
       roomLists: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateUser({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/wishLists")
+  @ApiNestedQuery(WishListFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "WishList",
+    action: "read",
+    possession: "any",
+  })
+  async findWishLists(
+    @common.Req() request: Request,
+    @common.Param() params: UserWhereUniqueInput
+  ): Promise<WishList[]> {
+    const query = plainToClass(WishListFindManyArgs, request.query);
+    const results = await this.service.findWishLists(params.id, {
+      ...query,
+      select: {
+        createdAt: true,
+        id: true,
+        updatedAt: true,
+
+        user: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/wishLists")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async connectWishLists(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: WishListWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      wishLists: {
+        connect: body,
+      },
+    };
+    await this.service.updateUser({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/wishLists")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async updateWishLists(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: WishListWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      wishLists: {
+        set: body,
+      },
+    };
+    await this.service.updateUser({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/wishLists")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectWishLists(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: WishListWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      wishLists: {
         disconnect: body,
       },
     };

@@ -2,6 +2,7 @@ import { SortOrder } from "../../util/SortOrder";
 
 export type RoomListOrderByInput = {
   createdAt?: SortOrder;
+  description?: SortOrder;
   id?: SortOrder;
   locationData?: SortOrder;
   locationType?: SortOrder;
@@ -10,6 +11,7 @@ export type RoomListOrderByInput = {
   placeAmeneties?: SortOrder;
   placeSpace?: SortOrder;
   placeType?: SortOrder;
+  price?: SortOrder;
   roomCreatedById?: SortOrder;
   title?: SortOrder;
   updatedAt?: SortOrder;

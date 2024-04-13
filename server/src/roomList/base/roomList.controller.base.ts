@@ -58,6 +58,7 @@ export class RoomListControllerBase {
       },
       select: {
         createdAt: true,
+        description: true,
         id: true,
         locationData: true,
         locationType: true,
@@ -66,6 +67,7 @@ export class RoomListControllerBase {
         placeAmeneties: true,
         placeSpace: true,
         placeType: true,
+        price: true,
 
         roomCreatedBy: {
           select: {
@@ -97,6 +99,7 @@ export class RoomListControllerBase {
       ...args,
       select: {
         createdAt: true,
+        description: true,
         id: true,
         locationData: true,
         locationType: true,
@@ -105,6 +108,7 @@ export class RoomListControllerBase {
         placeAmeneties: true,
         placeSpace: true,
         placeType: true,
+        price: true,
 
         roomCreatedBy: {
           select: {
@@ -137,6 +141,7 @@ export class RoomListControllerBase {
       where: params,
       select: {
         createdAt: true,
+        description: true,
         id: true,
         locationData: true,
         locationType: true,
@@ -145,6 +150,7 @@ export class RoomListControllerBase {
         placeAmeneties: true,
         placeSpace: true,
         placeType: true,
+        price: true,
 
         roomCreatedBy: {
           select: {
@@ -192,6 +198,7 @@ export class RoomListControllerBase {
         },
         select: {
           createdAt: true,
+          description: true,
           id: true,
           locationData: true,
           locationType: true,
@@ -200,6 +207,7 @@ export class RoomListControllerBase {
           placeAmeneties: true,
           placeSpace: true,
           placeType: true,
+          price: true,
 
           roomCreatedBy: {
             select: {
@@ -240,6 +248,7 @@ export class RoomListControllerBase {
         where: params,
         select: {
           createdAt: true,
+          description: true,
           id: true,
           locationData: true,
           locationType: true,
@@ -248,6 +257,7 @@ export class RoomListControllerBase {
           placeAmeneties: true,
           placeSpace: true,
           placeType: true,
+          price: true,
 
           roomCreatedBy: {
             select: {

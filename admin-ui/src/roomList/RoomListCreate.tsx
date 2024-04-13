@@ -1,18 +1,22 @@
 import * as React from "react";
+
 import {
   Create,
   SimpleForm,
   CreateProps,
   TextInput,
+  NumberInput,
   ReferenceInput,
   SelectInput,
 } from "react-admin";
+
 import { UserTitle } from "../user/UserTitle";
 
 export const RoomListCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
+        <TextInput label="description" multiline source="description" />
         <div />
         <TextInput label="locationType" source="locationType" />
         <div />
@@ -20,6 +24,7 @@ export const RoomListCreate = (props: CreateProps): React.ReactElement => {
         <div />
         <div />
         <TextInput label="placeType" source="placeType" />
+        <NumberInput label="price" source="price" />
         <ReferenceInput
           source="roomCreatedBy.id"
           reference="User"
@@ -27,7 +32,7 @@ export const RoomListCreate = (props: CreateProps): React.ReactElement => {
         >
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>
-        <TextInput label="Title" source="title" />
+        <TextInput label="title" source="title" />
       </SimpleForm>
     </Create>
   );

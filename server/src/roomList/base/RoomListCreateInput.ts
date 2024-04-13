@@ -11,15 +11,23 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+import { IsString, IsNumber, ValidateNested } from "class-validator";
 import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
-import { IsString, ValidateNested } from "class-validator";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 import { Type } from "class-transformer";
 
 @InputType()
 class RoomListCreateInput {
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  description!: string;
+
   @ApiProperty({
     required: true,
   })
@@ -70,6 +78,14 @@ class RoomListCreateInput {
   @IsString()
   @Field(() => String)
   placeType!: string;
+
+  @ApiProperty({
+    required: true,
+    type: Number,
+  })
+  @IsNumber()
+  @Field(() => Number)
+  price!: number;
 
   @ApiProperty({
     required: true,

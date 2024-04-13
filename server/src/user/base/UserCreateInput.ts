@@ -17,6 +17,7 @@ import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
 import { RoomListCreateNestedManyWithoutUsersInput } from "./RoomListCreateNestedManyWithoutUsersInput";
 import { Type } from "class-transformer";
+import { WishListCreateNestedManyWithoutUsersInput } from "./WishListCreateNestedManyWithoutUsersInput";
 
 @InputType()
 class UserCreateInput {
@@ -87,6 +88,18 @@ class UserCreateInput {
   @IsString()
   @Field(() => String)
   username!: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => WishListCreateNestedManyWithoutUsersInput,
+  })
+  @ValidateNested()
+  @Type(() => WishListCreateNestedManyWithoutUsersInput)
+  @IsOptional()
+  @Field(() => WishListCreateNestedManyWithoutUsersInput, {
+    nullable: true,
+  })
+  wishLists?: WishListCreateNestedManyWithoutUsersInput;
 }
 
 export { UserCreateInput as UserCreateInput };

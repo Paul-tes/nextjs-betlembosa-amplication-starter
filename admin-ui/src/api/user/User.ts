@@ -1,5 +1,6 @@
 import { JsonValue } from "type-fest";
 import { RoomList } from "../roomList/RoomList";
+import { WishList } from "../wishList/WishList";
 
 export type User = {
   createdAt: Date;
@@ -11,4 +12,5 @@ export type User = {
   roomLists?: Array<RoomList>;
   updatedAt: Date;
   username: string;
+  wishLists?: Array<WishList>;
 };

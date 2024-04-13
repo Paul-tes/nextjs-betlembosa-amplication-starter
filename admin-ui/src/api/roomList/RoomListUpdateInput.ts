@@ -2,6 +2,7 @@ import { InputJsonValue } from "../../types";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type RoomListUpdateInput = {
+  description?: string;
   locationData?: InputJsonValue;
   locationType?: string;
   mapData?: InputJsonValue;
@@ -9,6 +10,7 @@ export type RoomListUpdateInput = {
   placeAmeneties?: InputJsonValue;
   placeSpace?: InputJsonValue;
   placeType?: string;
+  price?: number;
   roomCreatedBy?: UserWhereUniqueInput;
   title?: string;
 };
