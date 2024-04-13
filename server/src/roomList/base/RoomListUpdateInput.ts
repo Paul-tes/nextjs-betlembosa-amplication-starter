@@ -25,6 +25,17 @@ class RoomListUpdateInput {
     nullable: true,
   })
   locationType?: string;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  placeType?: string;
 }
 
 export { RoomListUpdateInput as RoomListUpdateInput };

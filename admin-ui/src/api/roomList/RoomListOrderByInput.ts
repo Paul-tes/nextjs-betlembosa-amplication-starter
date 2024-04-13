@@ -4,5 +4,6 @@ export type RoomListOrderByInput = {
   createdAt?: SortOrder;
   id?: SortOrder;
   locationType?: SortOrder;
+  placeType?: SortOrder;
   updatedAt?: SortOrder;
 };

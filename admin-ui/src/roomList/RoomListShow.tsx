@@ -14,6 +14,7 @@ export const RoomListShow = (props: ShowProps): React.ReactElement => {
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />
         <TextField label="locationType" source="locationType" />
+        <TextField label="placeType" source="placeType" />
         <DateField source="updatedAt" label="Updated At" />
       </SimpleShowLayout>
     </Show>

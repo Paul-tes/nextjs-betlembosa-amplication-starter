@@ -22,6 +22,14 @@ class RoomListCreateInput {
   @IsString()
   @Field(() => String)
   locationType!: string;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  placeType!: string;
 }
 
 export { RoomListCreateInput as RoomListCreateInput };

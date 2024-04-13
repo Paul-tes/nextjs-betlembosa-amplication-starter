@@ -6,6 +6,7 @@ export const RoomListCreate = (props: CreateProps): React.ReactElement => {
     <Create {...props}>
       <SimpleForm>
         <TextInput label="locationType" source="locationType" />
+        <TextInput label="placeType" source="placeType" />
       </SimpleForm>
     </Create>
   );

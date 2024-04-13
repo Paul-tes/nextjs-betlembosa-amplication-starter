@@ -38,6 +38,17 @@ class RoomListWhereInput {
     nullable: true,
   })
   locationType?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringFilter,
+  })
+  @Type(() => StringFilter)
+  @IsOptional()
+  @Field(() => StringFilter, {
+    nullable: true,
+  })
+  placeType?: StringFilter;
 }
 
 export { RoomListWhereInput as RoomListWhereInput };

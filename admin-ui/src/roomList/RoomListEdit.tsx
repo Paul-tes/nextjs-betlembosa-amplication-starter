@@ -6,6 +6,7 @@ export const RoomListEdit = (props: EditProps): React.ReactElement => {
     <Edit {...props}>
       <SimpleForm>
         <TextInput label="locationType" source="locationType" />
+        <TextInput label="placeType" source="placeType" />
       </SimpleForm>
     </Edit>
   );

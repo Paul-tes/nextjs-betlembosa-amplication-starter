@@ -23,5 +23,6 @@ model RoomList {
   createdAt    DateTime @default(now())
   id           String   @id @default(cuid())
   locationType String
+  placeType    String
   updatedAt    DateTime @updatedAt
 }

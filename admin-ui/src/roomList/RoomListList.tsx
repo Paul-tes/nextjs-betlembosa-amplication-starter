@@ -15,6 +15,7 @@ export const RoomListList = (props: ListProps): React.ReactElement => {
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />
         <TextField label="locationType" source="locationType" />
+        <TextField label="placeType" source="placeType" />
         <DateField source="updatedAt" label="Updated At" />
       </Datagrid>
     </List>

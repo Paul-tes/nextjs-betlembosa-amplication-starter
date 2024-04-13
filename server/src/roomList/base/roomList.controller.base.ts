@@ -54,6 +54,7 @@ export class RoomListControllerBase {
         createdAt: true,
         id: true,
         locationType: true,
+        placeType: true,
         updatedAt: true,
       },
     });
@@ -79,6 +80,7 @@ export class RoomListControllerBase {
         createdAt: true,
         id: true,
         locationType: true,
+        placeType: true,
         updatedAt: true,
       },
     });
@@ -105,6 +107,7 @@ export class RoomListControllerBase {
         createdAt: true,
         id: true,
         locationType: true,
+        placeType: true,
         updatedAt: true,
       },
     });
@@ -140,6 +143,7 @@ export class RoomListControllerBase {
           createdAt: true,
           id: true,
           locationType: true,
+          placeType: true,
           updatedAt: true,
         },
       });
@@ -174,6 +178,7 @@ export class RoomListControllerBase {
           createdAt: true,
           id: true,
           locationType: true,
+          placeType: true,
           updatedAt: true,
         },
       });
