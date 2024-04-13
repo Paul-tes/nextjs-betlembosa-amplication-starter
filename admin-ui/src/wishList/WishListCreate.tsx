@@ -13,7 +13,7 @@ export const WishListCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
-        <TextInput label="listing" source="listing" />
+        <TextInput label="RoomListing" source="roomListing" />
         <ReferenceInput source="user.id" reference="User" label="user">
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>

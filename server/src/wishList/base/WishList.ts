@@ -42,7 +42,7 @@ class WishList {
   @Field(() => String, {
     nullable: true,
   })
-  listing!: string | null;
+  roomListing!: string | null;
 
   @ApiProperty({
     required: true,

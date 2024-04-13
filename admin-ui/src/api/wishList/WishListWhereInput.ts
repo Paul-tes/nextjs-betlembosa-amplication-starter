@@ -4,6 +4,6 @@ import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type WishListWhereInput = {
   id?: StringFilter;
-  listing?: StringNullableFilter;
+  roomListing?: StringNullableFilter;
   user?: UserWhereUniqueInput;
 };

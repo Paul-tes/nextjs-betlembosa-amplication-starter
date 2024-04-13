@@ -59,7 +59,7 @@ export class WishListControllerBase {
       select: {
         createdAt: true,
         id: true,
-        listing: true,
+        roomListing: true,
         updatedAt: true,
 
         user: {
@@ -90,7 +90,7 @@ export class WishListControllerBase {
       select: {
         createdAt: true,
         id: true,
-        listing: true,
+        roomListing: true,
         updatedAt: true,
 
         user: {
@@ -122,7 +122,7 @@ export class WishListControllerBase {
       select: {
         createdAt: true,
         id: true,
-        listing: true,
+        roomListing: true,
         updatedAt: true,
 
         user: {
@@ -169,7 +169,7 @@ export class WishListControllerBase {
         select: {
           createdAt: true,
           id: true,
-          listing: true,
+          roomListing: true,
           updatedAt: true,
 
           user: {
@@ -209,7 +209,7 @@ export class WishListControllerBase {
         select: {
           createdAt: true,
           id: true,
-          listing: true,
+          roomListing: true,
           updatedAt: true,
 
           user: {

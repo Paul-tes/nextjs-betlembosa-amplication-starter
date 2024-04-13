@@ -39,7 +39,7 @@ class WishListWhereInput {
   @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  listing?: StringNullableFilter;
+  roomListing?: StringNullableFilter;
 
   @ApiProperty({
     required: false,

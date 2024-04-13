@@ -50,7 +50,7 @@ class WishListOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  listing?: SortOrder;
+  roomListing?: SortOrder;
 
   @ApiProperty({
     required: false,

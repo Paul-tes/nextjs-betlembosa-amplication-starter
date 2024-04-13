@@ -1,6 +1,6 @@
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type WishListCreateInput = {
-  listing?: string | null;
+  roomListing?: string | null;
   user: UserWhereUniqueInput;
 };

@@ -26,7 +26,7 @@ class WishListUpdateInput {
   @Field(() => String, {
     nullable: true,
   })
-  listing?: string | null;
+  roomListing?: string | null;
 
   @ApiProperty({
     required: false,
