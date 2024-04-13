@@ -26,6 +26,7 @@ import { RoomListFindUniqueArgs } from "./RoomListFindUniqueArgs";
 import { CreateRoomListArgs } from "./CreateRoomListArgs";
 import { UpdateRoomListArgs } from "./UpdateRoomListArgs";
 import { DeleteRoomListArgs } from "./DeleteRoomListArgs";
+import { User } from "../../user/base/User";
 import { RoomListService } from "../roomList.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => RoomList)
@@ -92,7 +93,13 @@ export class RoomListResolverBase {
   ): Promise<RoomList> {
     return await this.service.createRoomList({
       ...args,
-      data: args.data,
+      data: {
+        ...args.data,
+
+        roomCreatedBy: {
+          connect: args.data.roomCreatedBy,
+        },
+      },
     });
   }
 
@@ -109,7 +116,13 @@ export class RoomListResolverBase {
     try {
       return await this.service.updateRoomList({
         ...args,
-        data: args.data,
+        data: {
+          ...args.data,
+
+          roomCreatedBy: {
+            connect: args.data.roomCreatedBy,
+          },
+        },
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -140,5 +153,26 @@ export class RoomListResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => User, {
+    nullable: true,
+    name: "roomCreatedBy",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async getRoomCreatedBy(
+    @graphql.Parent() parent: RoomList
+  ): Promise<User | null> {
+    const result = await this.service.getRoomCreatedBy(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 }

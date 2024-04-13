@@ -8,21 +8,30 @@ generator client {
 }
 
 model User {
-  createdAt DateTime @default(now())
-  email     String?  @unique
+  createdAt DateTime   @default(now())
+  email     String?    @unique
   firstName String?
-  id        String   @id @default(cuid())
+  id        String     @id @default(cuid())
   lastName  String?
   password  String
   roles     Json
-  updatedAt DateTime @updatedAt
-  username  String   @unique
+  roomLists RoomList[]
+  updatedAt DateTime   @updatedAt
+  username  String     @unique
 }
 
 model RoomList {
-  createdAt    DateTime @default(now())
-  id           String   @id @default(cuid())
-  locationType String
-  placeType    String
-  updatedAt    DateTime @updatedAt
+  createdAt       DateTime @default(now())
+  id              String   @id @default(cuid())
+  locationData    Json
+  locationType    String
+  mapData         Json
+  photos          Json
+  placeAmeneties  Json
+  placeSpace      Json
+  placeType       String
+  roomCreatedBy   User     @relation(fields: [roomCreatedById], references: [id])
+  roomCreatedById String
+  title           String
+  updatedAt       DateTime @updatedAt
 }

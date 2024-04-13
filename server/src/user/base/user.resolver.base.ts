@@ -26,6 +26,8 @@ import { UserFindUniqueArgs } from "./UserFindUniqueArgs";
 import { CreateUserArgs } from "./CreateUserArgs";
 import { UpdateUserArgs } from "./UpdateUserArgs";
 import { DeleteUserArgs } from "./DeleteUserArgs";
+import { RoomListFindManyArgs } from "../../roomList/base/RoomListFindManyArgs";
+import { RoomList } from "../../roomList/base/RoomList";
 import { UserService } from "../user.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => User)
@@ -130,5 +132,25 @@ export class UserResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [RoomList], { name: "roomLists" })
+  @nestAccessControl.UseRoles({
+    resource: "RoomList",
+    action: "read",
+    possession: "any",
+  })
+  async findRoomLists(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: RoomListFindManyArgs
+  ): Promise<RoomList[]> {
+    const results = await this.service.findRoomLists(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
   }
 }

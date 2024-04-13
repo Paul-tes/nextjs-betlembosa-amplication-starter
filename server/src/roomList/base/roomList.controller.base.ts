@@ -49,12 +49,31 @@ export class RoomListControllerBase {
     @common.Body() data: RoomListCreateInput
   ): Promise<RoomList> {
     return await this.service.createRoomList({
-      data: data,
+      data: {
+        ...data,
+
+        roomCreatedBy: {
+          connect: data.roomCreatedBy,
+        },
+      },
       select: {
         createdAt: true,
         id: true,
+        locationData: true,
         locationType: true,
+        mapData: true,
+        photos: true,
+        placeAmeneties: true,
+        placeSpace: true,
         placeType: true,
+
+        roomCreatedBy: {
+          select: {
+            id: true,
+          },
+        },
+
+        title: true,
         updatedAt: true,
       },
     });
@@ -79,8 +98,21 @@ export class RoomListControllerBase {
       select: {
         createdAt: true,
         id: true,
+        locationData: true,
         locationType: true,
+        mapData: true,
+        photos: true,
+        placeAmeneties: true,
+        placeSpace: true,
         placeType: true,
+
+        roomCreatedBy: {
+          select: {
+            id: true,
+          },
+        },
+
+        title: true,
         updatedAt: true,
       },
     });
@@ -106,8 +138,21 @@ export class RoomListControllerBase {
       select: {
         createdAt: true,
         id: true,
+        locationData: true,
         locationType: true,
+        mapData: true,
+        photos: true,
+        placeAmeneties: true,
+        placeSpace: true,
         placeType: true,
+
+        roomCreatedBy: {
+          select: {
+            id: true,
+          },
+        },
+
+        title: true,
         updatedAt: true,
       },
     });
@@ -138,12 +183,31 @@ export class RoomListControllerBase {
     try {
       return await this.service.updateRoomList({
         where: params,
-        data: data,
+        data: {
+          ...data,
+
+          roomCreatedBy: {
+            connect: data.roomCreatedBy,
+          },
+        },
         select: {
           createdAt: true,
           id: true,
+          locationData: true,
           locationType: true,
+          mapData: true,
+          photos: true,
+          placeAmeneties: true,
+          placeSpace: true,
           placeType: true,
+
+          roomCreatedBy: {
+            select: {
+              id: true,
+            },
+          },
+
+          title: true,
           updatedAt: true,
         },
       });
@@ -177,8 +241,21 @@ export class RoomListControllerBase {
         select: {
           createdAt: true,
           id: true,
+          locationData: true,
           locationType: true,
+          mapData: true,
+          photos: true,
+          placeAmeneties: true,
+          placeSpace: true,
           placeType: true,
+
+          roomCreatedBy: {
+            select: {
+              id: true,
+            },
+          },
+
+          title: true,
           updatedAt: true,
         },
       });

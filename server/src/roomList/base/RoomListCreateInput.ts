@@ -11,10 +11,22 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString } from "class-validator";
+import { IsJSONValue } from "../../validators";
+import { GraphQLJSON } from "graphql-type-json";
+import { InputJsonValue } from "../../types";
+import { IsString, ValidateNested } from "class-validator";
+import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
+import { Type } from "class-transformer";
 
 @InputType()
 class RoomListCreateInput {
+  @ApiProperty({
+    required: true,
+  })
+  @IsJSONValue()
+  @Field(() => GraphQLJSON)
+  locationData!: InputJsonValue;
+
   @ApiProperty({
     required: true,
     type: String,
@@ -25,11 +37,56 @@ class RoomListCreateInput {
 
   @ApiProperty({
     required: true,
+  })
+  @IsJSONValue()
+  @Field(() => GraphQLJSON)
+  mapData!: InputJsonValue;
+
+  @ApiProperty({
+    required: true,
+  })
+  @IsJSONValue()
+  @Field(() => GraphQLJSON)
+  photos!: InputJsonValue;
+
+  @ApiProperty({
+    required: true,
+  })
+  @IsJSONValue()
+  @Field(() => GraphQLJSON)
+  placeAmeneties!: InputJsonValue;
+
+  @ApiProperty({
+    required: true,
+  })
+  @IsJSONValue()
+  @Field(() => GraphQLJSON)
+  placeSpace!: InputJsonValue;
+
+  @ApiProperty({
+    required: true,
     type: String,
   })
   @IsString()
   @Field(() => String)
   placeType!: string;
+
+  @ApiProperty({
+    required: true,
+    type: () => UserWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => UserWhereUniqueInput)
+  @Field(() => UserWhereUniqueInput)
+  roomCreatedBy!: UserWhereUniqueInput;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  title!: string;
 }
 
 export { RoomListCreateInput as RoomListCreateInput };

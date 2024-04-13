@@ -1,7 +1,7 @@
 import { RoomList as TRoomList } from "../api/roomList/RoomList";
 
-export const ROOMLIST_TITLE_FIELD = "locationType";
+export const ROOMLIST_TITLE_FIELD = "title";
 
 export const RoomListTitle = (record: TRoomList): string => {
-  return record.locationType?.toString() || String(record.id);
+  return record.title?.toString() || String(record.id);
 };

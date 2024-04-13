@@ -26,6 +26,9 @@ import { User } from "./User";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserWhereUniqueInput } from "./UserWhereUniqueInput";
 import { UserUpdateInput } from "./UserUpdateInput";
+import { RoomListFindManyArgs } from "../../roomList/base/RoomListFindManyArgs";
+import { RoomList } from "../../roomList/base/RoomList";
+import { RoomListWhereUniqueInput } from "../../roomList/base/RoomListWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -203,5 +206,115 @@ export class UserControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/roomLists")
+  @ApiNestedQuery(RoomListFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "RoomList",
+    action: "read",
+    possession: "any",
+  })
+  async findRoomLists(
+    @common.Req() request: Request,
+    @common.Param() params: UserWhereUniqueInput
+  ): Promise<RoomList[]> {
+    const query = plainToClass(RoomListFindManyArgs, request.query);
+    const results = await this.service.findRoomLists(params.id, {
+      ...query,
+      select: {
+        createdAt: true,
+        id: true,
+        locationData: true,
+        locationType: true,
+        mapData: true,
+        photos: true,
+        placeAmeneties: true,
+        placeSpace: true,
+        placeType: true,
+
+        roomCreatedBy: {
+          select: {
+            id: true,
+          },
+        },
+
+        title: true,
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/roomLists")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async connectRoomLists(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: RoomListWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      roomLists: {
+        connect: body,
+      },
+    };
+    await this.service.updateUser({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/roomLists")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async updateRoomLists(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: RoomListWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      roomLists: {
+        set: body,
+      },
+    };
+    await this.service.updateUser({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/roomLists")
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectRoomLists(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: RoomListWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      roomLists: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateUser({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

@@ -11,8 +11,12 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsString } from "class-validator";
+import { IsDate, IsString, ValidateNested } from "class-validator";
 import { Type } from "class-transformer";
+import { IsJSONValue } from "../../validators";
+import { GraphQLJSON } from "graphql-type-json";
+import { JsonValue } from "type-fest";
+import { User } from "../../user/base/User";
 
 @ObjectType()
 class RoomList {
@@ -34,6 +38,13 @@ class RoomList {
 
   @ApiProperty({
     required: true,
+  })
+  @IsJSONValue()
+  @Field(() => GraphQLJSON)
+  locationData!: JsonValue;
+
+  @ApiProperty({
+    required: true,
     type: String,
   })
   @IsString()
@@ -42,11 +53,55 @@ class RoomList {
 
   @ApiProperty({
     required: true,
+  })
+  @IsJSONValue()
+  @Field(() => GraphQLJSON)
+  mapData!: JsonValue;
+
+  @ApiProperty({
+    required: true,
+  })
+  @IsJSONValue()
+  @Field(() => GraphQLJSON)
+  photos!: JsonValue;
+
+  @ApiProperty({
+    required: true,
+  })
+  @IsJSONValue()
+  @Field(() => GraphQLJSON)
+  placeAmeneties!: JsonValue;
+
+  @ApiProperty({
+    required: true,
+  })
+  @IsJSONValue()
+  @Field(() => GraphQLJSON)
+  placeSpace!: JsonValue;
+
+  @ApiProperty({
+    required: true,
     type: String,
   })
   @IsString()
   @Field(() => String)
   placeType!: string;
+
+  @ApiProperty({
+    required: true,
+    type: () => User,
+  })
+  @ValidateNested()
+  @Type(() => User)
+  roomCreatedBy?: User;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  title!: string;
 
   @ApiProperty({
     required: true,
