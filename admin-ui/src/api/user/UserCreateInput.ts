@@ -1,5 +1,6 @@
 import { InputJsonValue } from "../../types";
 import { RoomListCreateNestedManyWithoutUsersInput } from "./RoomListCreateNestedManyWithoutUsersInput";
+import { TripCreateNestedManyWithoutUsersInput } from "./TripCreateNestedManyWithoutUsersInput";
 import { WishListCreateNestedManyWithoutUsersInput } from "./WishListCreateNestedManyWithoutUsersInput";
 
 export type UserCreateInput = {
@@ -9,6 +10,7 @@ export type UserCreateInput = {
   password: string;
   roles: InputJsonValue;
   roomLists?: RoomListCreateNestedManyWithoutUsersInput;
+  trips?: TripCreateNestedManyWithoutUsersInput;
   username: string;
   wishLists?: WishListCreateNestedManyWithoutUsersInput;
 };

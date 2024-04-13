@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { UserModule } from "./user/user.module";
 import { RoomListModule } from "./roomList/roomList.module";
 import { WishListModule } from "./wishList/wishList.module";
+import { TripModule } from "./trip/trip.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { SecretsManagerModule } from "./providers/secrets/secretsManager.module";
@@ -22,6 +23,7 @@ import { AuthModule } from "./auth/auth.module";
     UserModule,
     RoomListModule,
     WishListModule,
+    TripModule,
     HealthModule,
     PrismaModule,
     SecretsManagerModule,

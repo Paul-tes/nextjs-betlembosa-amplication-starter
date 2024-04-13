@@ -1,5 +1,6 @@
 import { InputJsonValue } from "../../types";
 import { RoomListUpdateManyWithoutUsersInput } from "./RoomListUpdateManyWithoutUsersInput";
+import { TripUpdateManyWithoutUsersInput } from "./TripUpdateManyWithoutUsersInput";
 import { WishListUpdateManyWithoutUsersInput } from "./WishListUpdateManyWithoutUsersInput";
 
 export type UserUpdateInput = {
@@ -9,6 +10,7 @@ export type UserUpdateInput = {
   password?: string;
   roles?: InputJsonValue;
   roomLists?: RoomListUpdateManyWithoutUsersInput;
+  trips?: TripUpdateManyWithoutUsersInput;
   username?: string;
   wishLists?: WishListUpdateManyWithoutUsersInput;
 };

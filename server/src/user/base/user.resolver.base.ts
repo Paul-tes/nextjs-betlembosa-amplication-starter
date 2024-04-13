@@ -28,6 +28,8 @@ import { UpdateUserArgs } from "./UpdateUserArgs";
 import { DeleteUserArgs } from "./DeleteUserArgs";
 import { RoomListFindManyArgs } from "../../roomList/base/RoomListFindManyArgs";
 import { RoomList } from "../../roomList/base/RoomList";
+import { TripFindManyArgs } from "../../trip/base/TripFindManyArgs";
+import { Trip } from "../../trip/base/Trip";
 import { WishListFindManyArgs } from "../../wishList/base/WishListFindManyArgs";
 import { WishList } from "../../wishList/base/WishList";
 import { UserService } from "../user.service";
@@ -148,6 +150,26 @@ export class UserResolverBase {
     @graphql.Args() args: RoomListFindManyArgs
   ): Promise<RoomList[]> {
     const results = await this.service.findRoomLists(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Trip], { name: "trips" })
+  @nestAccessControl.UseRoles({
+    resource: "Trip",
+    action: "read",
+    possession: "any",
+  })
+  async findTrips(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: TripFindManyArgs
+  ): Promise<Trip[]> {
+    const results = await this.service.findTrips(parent.id, args);
 
     if (!results) {
       return [];

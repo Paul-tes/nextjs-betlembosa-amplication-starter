@@ -15,6 +15,7 @@ import {
   Prisma,
   User as PrismaUser,
   RoomList as PrismaRoomList,
+  Trip as PrismaTrip,
   WishList as PrismaWishList,
 } from "@prisma/client";
 
@@ -86,6 +87,17 @@ export class UserServiceBase {
         where: { id: parentId },
       })
       .roomLists(args);
+  }
+
+  async findTrips(
+    parentId: string,
+    args: Prisma.TripFindManyArgs
+  ): Promise<PrismaTrip[]> {
+    return this.prisma.user
+      .findUniqueOrThrow({
+        where: { id: parentId },
+      })
+      .trips(args);
   }
 
   async findWishLists(

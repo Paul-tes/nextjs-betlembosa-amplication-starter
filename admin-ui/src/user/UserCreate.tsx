@@ -11,6 +11,7 @@ import {
 } from "react-admin";
 
 import { RoomListTitle } from "../roomList/RoomListTitle";
+import { TripTitle } from "../trip/TripTitle";
 import { WishListTitle } from "../wishList/WishListTitle";
 import { ROLES_OPTIONS } from "../user/RolesOptions";
 
@@ -35,6 +36,14 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           format={(value: any) => value && value.map((v: any) => v.id)}
         >
           <SelectArrayInput optionText={RoomListTitle} />
+        </ReferenceArrayInput>
+        <ReferenceArrayInput
+          source="trips"
+          reference="Trip"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={TripTitle} />
         </ReferenceArrayInput>
         <TextInput label="Username" source="username" />
         <ReferenceArrayInput

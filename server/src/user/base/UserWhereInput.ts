@@ -16,6 +16,7 @@ import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
 import { StringFilter } from "../../util/StringFilter";
 import { RoomListListRelationFilter } from "../../roomList/base/RoomListListRelationFilter";
+import { TripListRelationFilter } from "../../trip/base/TripListRelationFilter";
 import { WishListListRelationFilter } from "../../wishList/base/WishListListRelationFilter";
 
 @InputType()
@@ -75,6 +76,18 @@ class UserWhereInput {
     nullable: true,
   })
   roomLists?: RoomListListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => TripListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => TripListRelationFilter)
+  @IsOptional()
+  @Field(() => TripListRelationFilter, {
+    nullable: true,
+  })
+  trips?: TripListRelationFilter;
 
   @ApiProperty({
     required: false,
