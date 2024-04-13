@@ -17,6 +17,7 @@ import { IsOptional, ValidateNested } from "class-validator";
 import { JsonFilter } from "../../util/JsonFilter";
 import { FloatFilter } from "../../util/FloatFilter";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
+import { WishListWhereUniqueInput } from "../../wishList/base/WishListWhereUniqueInput";
 
 @InputType()
 class RoomListWhereInput {
@@ -152,6 +153,18 @@ class RoomListWhereInput {
     nullable: true,
   })
   title?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => WishListWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => WishListWhereUniqueInput)
+  @IsOptional()
+  @Field(() => WishListWhereUniqueInput, {
+    nullable: true,
+  })
+  wishList?: WishListWhereUniqueInput;
 }
 
 export { RoomListWhereInput as RoomListWhereInput };

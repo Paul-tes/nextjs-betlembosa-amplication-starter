@@ -8,6 +8,7 @@ import {
   ReferenceField,
 } from "react-admin";
 import { USER_TITLE_FIELD } from "../user/UserTitle";
+import { WISHLIST_TITLE_FIELD } from "../wishList/WishListTitle";
 
 export const RoomListShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -29,6 +30,13 @@ export const RoomListShow = (props: ShowProps): React.ReactElement => {
         </ReferenceField>
         <TextField label="title" source="title" />
         <DateField source="updatedAt" label="Updated At" />
+        <ReferenceField
+          label="WishList"
+          source="wishlist.id"
+          reference="WishList"
+        >
+          <TextField source={WISHLIST_TITLE_FIELD} />
+        </ReferenceField>
       </SimpleShowLayout>
     </Show>
   );

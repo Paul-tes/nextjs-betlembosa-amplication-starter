@@ -22,6 +22,7 @@ import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 import { Type } from "class-transformer";
+import { WishListWhereUniqueInput } from "../../wishList/base/WishListWhereUniqueInput";
 
 @InputType()
 class RoomListUpdateInput {
@@ -141,6 +142,18 @@ class RoomListUpdateInput {
     nullable: true,
   })
   title?: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => WishListWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => WishListWhereUniqueInput)
+  @IsOptional()
+  @Field(() => WishListWhereUniqueInput, {
+    nullable: true,
+  })
+  wishList?: WishListWhereUniqueInput | null;
 }
 
 export { RoomListUpdateInput as RoomListUpdateInput };

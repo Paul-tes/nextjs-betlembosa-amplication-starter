@@ -10,10 +10,12 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
+
 import {
   Prisma,
   RoomList as PrismaRoomList,
   User as PrismaUser,
+  WishList as PrismaWishList,
 } from "@prisma/client";
 
 export class RoomListServiceBase {
@@ -55,5 +57,13 @@ export class RoomListServiceBase {
         where: { id: parentId },
       })
       .roomCreatedBy();
+  }
+
+  async getWishList(parentId: string): Promise<PrismaWishList | null> {
+    return this.prisma.roomList
+      .findUnique({
+        where: { id: parentId },
+      })
+      .wishList();
   }
 }

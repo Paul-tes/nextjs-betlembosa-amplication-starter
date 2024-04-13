@@ -12,6 +12,7 @@ import {
 } from "react-admin";
 
 import { USER_TITLE_FIELD } from "./UserTitle";
+import { WISHLIST_TITLE_FIELD } from "../wishList/WishListTitle";
 
 export const UserShow = (props: ShowProps): React.ReactElement => {
   return (
@@ -51,6 +52,13 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
             </ReferenceField>
             <TextField label="title" source="title" />
             <DateField source="updatedAt" label="Updated At" />
+            <ReferenceField
+              label="WishList"
+              source="wishlist.id"
+              reference="WishList"
+            >
+              <TextField source={WISHLIST_TITLE_FIELD} />
+            </ReferenceField>
           </Datagrid>
         </ReferenceManyField>
         <ReferenceManyField
@@ -61,7 +69,6 @@ export const UserShow = (props: ShowProps): React.ReactElement => {
           <Datagrid rowClick="show">
             <DateField source="createdAt" label="Created At" />
             <TextField label="ID" source="id" />
-            <TextField label="RoomListing" source="roomListing" />
             <DateField source="updatedAt" label="Updated At" />
             <ReferenceField label="user" source="user.id" reference="User">
               <TextField source={USER_TITLE_FIELD} />

@@ -26,6 +26,8 @@ import { WishListFindUniqueArgs } from "./WishListFindUniqueArgs";
 import { CreateWishListArgs } from "./CreateWishListArgs";
 import { UpdateWishListArgs } from "./UpdateWishListArgs";
 import { DeleteWishListArgs } from "./DeleteWishListArgs";
+import { RoomListFindManyArgs } from "../../roomList/base/RoomListFindManyArgs";
+import { RoomList } from "../../roomList/base/RoomList";
 import { User } from "../../user/base/User";
 import { WishListService } from "../wishList.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
@@ -153,6 +155,26 @@ export class WishListResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [RoomList], { name: "roomLists" })
+  @nestAccessControl.UseRoles({
+    resource: "RoomList",
+    action: "read",
+    possession: "any",
+  })
+  async findRoomLists(
+    @graphql.Parent() parent: WishList,
+    @graphql.Args() args: RoomListFindManyArgs
+  ): Promise<RoomList[]> {
+    const results = await this.service.findRoomLists(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)

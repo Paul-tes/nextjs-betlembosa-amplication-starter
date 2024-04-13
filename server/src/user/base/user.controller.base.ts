@@ -247,6 +247,12 @@ export class UserControllerBase {
 
         title: true,
         updatedAt: true,
+
+        wishList: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
     if (results === null) {
@@ -341,7 +347,6 @@ export class UserControllerBase {
       select: {
         createdAt: true,
         id: true,
-        roomListing: true,
         updatedAt: true,
 
         user: {

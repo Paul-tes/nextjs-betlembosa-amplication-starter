@@ -2,6 +2,7 @@ import { StringFilter } from "../../util/StringFilter";
 import { JsonFilter } from "../../util/JsonFilter";
 import { FloatFilter } from "../../util/FloatFilter";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
+import { WishListWhereUniqueInput } from "../wishList/WishListWhereUniqueInput";
 
 export type RoomListWhereInput = {
   description?: StringFilter;
@@ -16,4 +17,5 @@ export type RoomListWhereInput = {
   price?: FloatFilter;
   roomCreatedBy?: UserWhereUniqueInput;
   title?: StringFilter;
+  wishList?: WishListWhereUniqueInput;
 };

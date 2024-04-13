@@ -11,12 +11,18 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsNumber, ValidateNested } from "class-validator";
+import {
+  IsString,
+  IsNumber,
+  ValidateNested,
+  IsOptional,
+} from "class-validator";
 import { IsJSONValue } from "../../validators";
 import { GraphQLJSON } from "graphql-type-json";
 import { InputJsonValue } from "../../types";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 import { Type } from "class-transformer";
+import { WishListWhereUniqueInput } from "../../wishList/base/WishListWhereUniqueInput";
 
 @InputType()
 class RoomListCreateInput {
@@ -103,6 +109,18 @@ class RoomListCreateInput {
   @IsString()
   @Field(() => String)
   title!: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => WishListWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => WishListWhereUniqueInput)
+  @IsOptional()
+  @Field(() => WishListWhereUniqueInput, {
+    nullable: true,
+  })
+  wishList?: WishListWhereUniqueInput | null;
 }
 
 export { RoomListCreateInput as RoomListCreateInput };

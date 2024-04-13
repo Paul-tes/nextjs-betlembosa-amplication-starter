@@ -10,9 +10,11 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
+
 import {
   Prisma,
   WishList as PrismaWishList,
+  RoomList as PrismaRoomList,
   User as PrismaUser,
 } from "@prisma/client";
 
@@ -47,6 +49,17 @@ export class WishListServiceBase {
     args: Prisma.SelectSubset<T, Prisma.WishListDeleteArgs>
   ): Promise<PrismaWishList> {
     return this.prisma.wishList.delete(args);
+  }
+
+  async findRoomLists(
+    parentId: string,
+    args: Prisma.RoomListFindManyArgs
+  ): Promise<PrismaRoomList[]> {
+    return this.prisma.wishList
+      .findUniqueOrThrow({
+        where: { id: parentId },
+      })
+      .roomLists(args);
   }
 
   async getUser(parentId: string): Promise<PrismaUser | null> {

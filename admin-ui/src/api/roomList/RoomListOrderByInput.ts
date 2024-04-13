@@ -15,4 +15,5 @@ export type RoomListOrderByInput = {
   roomCreatedById?: SortOrder;
   title?: SortOrder;
   updatedAt?: SortOrder;
+  wishListId?: SortOrder;
 };

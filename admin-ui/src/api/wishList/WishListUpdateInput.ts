@@ -1,6 +1,7 @@
+import { RoomListUpdateManyWithoutWishListsInput } from "./RoomListUpdateManyWithoutWishListsInput";
 import { UserWhereUniqueInput } from "../user/UserWhereUniqueInput";
 
 export type WishListUpdateInput = {
-  roomListing?: string | null;
+  roomLists?: RoomListUpdateManyWithoutWishListsInput;
   user?: UserWhereUniqueInput;
 };

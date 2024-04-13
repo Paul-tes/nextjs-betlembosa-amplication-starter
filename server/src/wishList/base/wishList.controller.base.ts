@@ -26,6 +26,9 @@ import { WishList } from "./WishList";
 import { WishListFindManyArgs } from "./WishListFindManyArgs";
 import { WishListWhereUniqueInput } from "./WishListWhereUniqueInput";
 import { WishListUpdateInput } from "./WishListUpdateInput";
+import { RoomListFindManyArgs } from "../../roomList/base/RoomListFindManyArgs";
+import { RoomList } from "../../roomList/base/RoomList";
+import { RoomListWhereUniqueInput } from "../../roomList/base/RoomListWhereUniqueInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -59,7 +62,6 @@ export class WishListControllerBase {
       select: {
         createdAt: true,
         id: true,
-        roomListing: true,
         updatedAt: true,
 
         user: {
@@ -90,7 +92,6 @@ export class WishListControllerBase {
       select: {
         createdAt: true,
         id: true,
-        roomListing: true,
         updatedAt: true,
 
         user: {
@@ -122,7 +123,6 @@ export class WishListControllerBase {
       select: {
         createdAt: true,
         id: true,
-        roomListing: true,
         updatedAt: true,
 
         user: {
@@ -169,7 +169,6 @@ export class WishListControllerBase {
         select: {
           createdAt: true,
           id: true,
-          roomListing: true,
           updatedAt: true,
 
           user: {
@@ -209,7 +208,6 @@ export class WishListControllerBase {
         select: {
           createdAt: true,
           id: true,
-          roomListing: true,
           updatedAt: true,
 
           user: {
@@ -227,5 +225,123 @@ export class WishListControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @common.Get("/:id/roomLists")
+  @ApiNestedQuery(RoomListFindManyArgs)
+  @nestAccessControl.UseRoles({
+    resource: "RoomList",
+    action: "read",
+    possession: "any",
+  })
+  async findRoomLists(
+    @common.Req() request: Request,
+    @common.Param() params: WishListWhereUniqueInput
+  ): Promise<RoomList[]> {
+    const query = plainToClass(RoomListFindManyArgs, request.query);
+    const results = await this.service.findRoomLists(params.id, {
+      ...query,
+      select: {
+        createdAt: true,
+        description: true,
+        id: true,
+        locationData: true,
+        locationType: true,
+        mapData: true,
+        photos: true,
+        placeAmeneties: true,
+        placeSpace: true,
+        placeType: true,
+        price: true,
+
+        roomCreatedBy: {
+          select: {
+            id: true,
+          },
+        },
+
+        title: true,
+        updatedAt: true,
+
+        wishList: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/roomLists")
+  @nestAccessControl.UseRoles({
+    resource: "WishList",
+    action: "update",
+    possession: "any",
+  })
+  async connectRoomLists(
+    @common.Param() params: WishListWhereUniqueInput,
+    @common.Body() body: RoomListWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      roomLists: {
+        connect: body,
+      },
+    };
+    await this.service.updateWishList({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/roomLists")
+  @nestAccessControl.UseRoles({
+    resource: "WishList",
+    action: "update",
+    possession: "any",
+  })
+  async updateRoomLists(
+    @common.Param() params: WishListWhereUniqueInput,
+    @common.Body() body: RoomListWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      roomLists: {
+        set: body,
+      },
+    };
+    await this.service.updateWishList({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/roomLists")
+  @nestAccessControl.UseRoles({
+    resource: "WishList",
+    action: "update",
+    possession: "any",
+  })
+  async disconnectRoomLists(
+    @common.Param() params: WishListWhereUniqueInput,
+    @common.Body() body: RoomListWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      roomLists: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateWishList({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

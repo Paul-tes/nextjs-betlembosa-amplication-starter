@@ -1,9 +1,10 @@
+import { RoomList } from "../roomList/RoomList";
 import { User } from "../user/User";
 
 export type WishList = {
   createdAt: Date;
   id: string;
-  roomListing: string | null;
+  roomLists?: Array<RoomList>;
   updatedAt: Date;
   user?: User;
 };

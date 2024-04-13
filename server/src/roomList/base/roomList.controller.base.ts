@@ -55,6 +55,12 @@ export class RoomListControllerBase {
         roomCreatedBy: {
           connect: data.roomCreatedBy,
         },
+
+        wishList: data.wishList
+          ? {
+              connect: data.wishList,
+            }
+          : undefined,
       },
       select: {
         createdAt: true,
@@ -77,6 +83,12 @@ export class RoomListControllerBase {
 
         title: true,
         updatedAt: true,
+
+        wishList: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
   }
@@ -118,6 +130,12 @@ export class RoomListControllerBase {
 
         title: true,
         updatedAt: true,
+
+        wishList: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
   }
@@ -160,6 +178,12 @@ export class RoomListControllerBase {
 
         title: true,
         updatedAt: true,
+
+        wishList: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
     if (result === null) {
@@ -195,6 +219,12 @@ export class RoomListControllerBase {
           roomCreatedBy: {
             connect: data.roomCreatedBy,
           },
+
+          wishList: data.wishList
+            ? {
+                connect: data.wishList,
+              }
+            : undefined,
         },
         select: {
           createdAt: true,
@@ -217,6 +247,12 @@ export class RoomListControllerBase {
 
           title: true,
           updatedAt: true,
+
+          wishList: {
+            select: {
+              id: true,
+            },
+          },
         },
       });
     } catch (error) {
@@ -267,6 +303,12 @@ export class RoomListControllerBase {
 
           title: true,
           updatedAt: true,
+
+          wishList: {
+            select: {
+              id: true,
+            },
+          },
         },
       });
     } catch (error) {

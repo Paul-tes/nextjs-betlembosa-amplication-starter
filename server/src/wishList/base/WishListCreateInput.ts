@@ -11,22 +11,24 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional, ValidateNested } from "class-validator";
-import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
+import { RoomListCreateNestedManyWithoutWishListsInput } from "./RoomListCreateNestedManyWithoutWishListsInput";
+import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
+import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
 class WishListCreateInput {
   @ApiProperty({
-    required: false,
-    type: String,
+    required: true,
+    type: () => RoomListCreateNestedManyWithoutWishListsInput,
   })
-  @IsString()
+  @ValidateNested()
+  @Type(() => RoomListCreateNestedManyWithoutWishListsInput)
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => RoomListCreateNestedManyWithoutWishListsInput, {
     nullable: true,
   })
-  roomListing?: string | null;
+  roomLists?: RoomListCreateNestedManyWithoutWishListsInput;
 
   @ApiProperty({
     required: true,

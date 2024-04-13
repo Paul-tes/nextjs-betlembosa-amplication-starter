@@ -27,6 +27,7 @@ import { CreateRoomListArgs } from "./CreateRoomListArgs";
 import { UpdateRoomListArgs } from "./UpdateRoomListArgs";
 import { DeleteRoomListArgs } from "./DeleteRoomListArgs";
 import { User } from "../../user/base/User";
+import { WishList } from "../../wishList/base/WishList";
 import { RoomListService } from "../roomList.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => RoomList)
@@ -99,6 +100,12 @@ export class RoomListResolverBase {
         roomCreatedBy: {
           connect: args.data.roomCreatedBy,
         },
+
+        wishList: args.data.wishList
+          ? {
+              connect: args.data.wishList,
+            }
+          : undefined,
       },
     });
   }
@@ -122,6 +129,12 @@ export class RoomListResolverBase {
           roomCreatedBy: {
             connect: args.data.roomCreatedBy,
           },
+
+          wishList: args.data.wishList
+            ? {
+                connect: args.data.wishList,
+              }
+            : undefined,
         },
       });
     } catch (error) {
@@ -169,6 +182,27 @@ export class RoomListResolverBase {
     @graphql.Parent() parent: RoomList
   ): Promise<User | null> {
     const result = await this.service.getRoomCreatedBy(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => WishList, {
+    nullable: true,
+    name: "wishList",
+  })
+  @nestAccessControl.UseRoles({
+    resource: "WishList",
+    action: "read",
+    possession: "any",
+  })
+  async getWishList(
+    @graphql.Parent() parent: RoomList
+  ): Promise<WishList | null> {
+    const result = await this.service.getWishList(parent.id);
 
     if (!result) {
       return null;

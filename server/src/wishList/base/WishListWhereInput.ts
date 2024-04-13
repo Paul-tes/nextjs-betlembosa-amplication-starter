@@ -14,7 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { StringFilter } from "../../util/StringFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { RoomListListRelationFilter } from "../../roomList/base/RoomListListRelationFilter";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
 
 @InputType()
@@ -32,14 +32,15 @@ class WishListWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
+    type: () => RoomListListRelationFilter,
   })
-  @Type(() => StringNullableFilter)
+  @ValidateNested()
+  @Type(() => RoomListListRelationFilter)
   @IsOptional()
-  @Field(() => StringNullableFilter, {
+  @Field(() => RoomListListRelationFilter, {
     nullable: true,
   })
-  roomListing?: StringNullableFilter;
+  roomLists?: RoomListListRelationFilter;
 
   @ApiProperty({
     required: false,

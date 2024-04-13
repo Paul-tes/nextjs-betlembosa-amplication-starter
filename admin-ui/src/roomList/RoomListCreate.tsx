@@ -11,6 +11,7 @@ import {
 } from "react-admin";
 
 import { UserTitle } from "../user/UserTitle";
+import { WishListTitle } from "../wishList/WishListTitle";
 
 export const RoomListCreate = (props: CreateProps): React.ReactElement => {
   return (
@@ -33,6 +34,13 @@ export const RoomListCreate = (props: CreateProps): React.ReactElement => {
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>
         <TextInput label="title" source="title" />
+        <ReferenceInput
+          source="wishList.id"
+          reference="WishList"
+          label="WishList"
+        >
+          <SelectInput optionText={WishListTitle} />
+        </ReferenceInput>
       </SimpleForm>
     </Create>
   );
