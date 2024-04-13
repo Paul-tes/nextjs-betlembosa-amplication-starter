@@ -52,15 +52,14 @@ export class WishListControllerBase {
       data: {
         ...data,
 
-        user: data.user
-          ? {
-              connect: data.user,
-            }
-          : undefined,
+        user: {
+          connect: data.user,
+        },
       },
       select: {
         createdAt: true,
         id: true,
+        listing: true,
         updatedAt: true,
 
         user: {
@@ -91,6 +90,7 @@ export class WishListControllerBase {
       select: {
         createdAt: true,
         id: true,
+        listing: true,
         updatedAt: true,
 
         user: {
@@ -122,6 +122,7 @@ export class WishListControllerBase {
       select: {
         createdAt: true,
         id: true,
+        listing: true,
         updatedAt: true,
 
         user: {
@@ -161,15 +162,14 @@ export class WishListControllerBase {
         data: {
           ...data,
 
-          user: data.user
-            ? {
-                connect: data.user,
-              }
-            : undefined,
+          user: {
+            connect: data.user,
+          },
         },
         select: {
           createdAt: true,
           id: true,
+          listing: true,
           updatedAt: true,
 
           user: {
@@ -209,6 +209,7 @@ export class WishListControllerBase {
         select: {
           createdAt: true,
           id: true,
+          listing: true,
           updatedAt: true,
 
           user: {

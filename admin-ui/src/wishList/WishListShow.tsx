@@ -15,6 +15,7 @@ export const WishListShow = (props: ShowProps): React.ReactElement => {
       <SimpleShowLayout>
         <DateField source="createdAt" label="Created At" />
         <TextField label="ID" source="id" />
+        <TextField label="listing" source="listing" />
         <DateField source="updatedAt" label="Updated At" />
         <ReferenceField label="user" source="user.id" reference="User">
           <TextField source={USER_TITLE_FIELD} />

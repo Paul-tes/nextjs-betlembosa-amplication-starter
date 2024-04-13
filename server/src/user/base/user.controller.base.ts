@@ -341,6 +341,7 @@ export class UserControllerBase {
       select: {
         createdAt: true,
         id: true,
+        listing: true,
         updatedAt: true,
 
         user: {

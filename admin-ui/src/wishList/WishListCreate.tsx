@@ -3,6 +3,7 @@ import {
   Create,
   SimpleForm,
   CreateProps,
+  TextInput,
   ReferenceInput,
   SelectInput,
 } from "react-admin";
@@ -12,6 +13,7 @@ export const WishListCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
+        <TextInput label="listing" source="listing" />
         <ReferenceInput source="user.id" reference="User" label="user">
           <SelectInput optionText={UserTitle} />
         </ReferenceInput>
